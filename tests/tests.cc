@@ -111,7 +111,7 @@ TEST_CASE("Negative Amt", "[ex-6]") {
   REQUIRE(caught == true);
 }
 
-TEST_CASE("Print Nonexistent Acc", "[ex-6]") {
+TEST_CASE("Print Nonexistent Acc", "[ex-20]") {
   Atm atm;
   atm.RegisterAccount(87654321, 4321, "Sam Sepiol", 300.30);
   bool caught = false;
@@ -122,7 +122,7 @@ TEST_CASE("Print Nonexistent Acc", "[ex-6]") {
   }
   REQUIRE(caught == true);
 }
-TEST_CASE("Example: Invalid account withdraw", "[ex-4]") {
+TEST_CASE("Example: Invalid account withdraw", "[ex-19]") {
   Atm atm;
   atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 300.30);
   bool caught = false;
@@ -133,7 +133,7 @@ TEST_CASE("Example: Invalid account withdraw", "[ex-4]") {
   }
   REQUIRE(caught == true);
 }
-TEST_CASE("Example: Invalid account deposit", "[ex-4]") {
+TEST_CASE("Example: Invalid account deposit", "[ex-18]") {
   Atm atm;
   atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 300.30);
   bool caught = false;
@@ -144,7 +144,7 @@ TEST_CASE("Example: Invalid account deposit", "[ex-4]") {
   }
   REQUIRE(caught == true);
 }
-TEST_CASE("Example: Simple widthdraw", "[ex-2]") {
+TEST_CASE("correct deposit", "[ex-10]") {
   Atm atm;
   atm.RegisterAccount(12345678, 1234, "Sam Sepiol", 300.30);
   atm.DepositCash(12345678, 1234, 20.01);
