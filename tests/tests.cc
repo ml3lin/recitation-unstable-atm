@@ -144,3 +144,12 @@ TEST_CASE("Example: Invalid account deposit", "[ex-4]") {
   }
   REQUIRE(caught == true);
 }
+TEST_CASE("Example: Simple widthdraw", "[ex-2]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 1234, "Sam Sepiol", 300.30);
+  atm.DepositCash(12345678, 1234, 20.01);
+  auto accounts = atm.GetAccounts();
+  Account sam_account = accounts[{12345678, 1234}];
+
+  REQUIRE(sam_account.balance == 320.31);
+}
