@@ -74,3 +74,73 @@ TEST_CASE("Example: Print Prompt Ledger", "[ex-3]") {
   atm.PrintLedger("./prompt.txt", 12345678, 1234);
   REQUIRE(CompareFiles("./ex-1.txt", "./prompt.txt"));
 }
+
+TEST_CASE("Example: Invalid account", "[ex-4]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 609.21);
+  } catch (std::invalid_argument& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
+
+TEST_CASE("Negative Bal", "[ex-5]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 1234, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.WithdrawCash(12345678, 1234, 300.31);
+  } catch (std::runtime_error& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
+
+TEST_CASE("Negative Amt", "[ex-6]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 1234, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.WithdrawCash(12345678, 1234, -1.00);
+  } catch (std::invalid_argument& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
+
+TEST_CASE("Print Nonexistent Acc", "[ex-6]") {
+  Atm atm;
+  atm.RegisterAccount(87654321, 4321, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.PrintLedger("./prompt.txt", 27193783, 3678);
+  } catch (std::invalid_argument& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
+TEST_CASE("Example: Invalid account withdraw", "[ex-4]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.WithdrawCash(36271928, 2891, 5.00);
+  } catch (std::invalid_argument& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
+TEST_CASE("Example: Invalid account deposit", "[ex-4]") {
+  Atm atm;
+  atm.RegisterAccount(12345678, 12345, "Sam Sepiol", 300.30);
+  bool caught = false;
+  try {
+    atm.DepositCash(36271928, 2891, 5.00);
+  } catch (std::invalid_argument& e) {
+    caught = true;
+  }
+  REQUIRE(caught == true);
+}
